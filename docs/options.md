@@ -38,6 +38,12 @@ layout: default
 
 [tasks-and-targets]: http://gruntjs.com/configuring-tasks#task-configuration-and-targets
 
+## [partialsdir](http://assemble.io/docs/options-partialsdir.html)
+Type: `String`
+Default: `undefined`
+
+The directory to use as the "cwd" for [partials](http://assemble.io/docs/options-partials.html). When this option is defined, partials may be defined using only their name.
+
 ## [partials](http://assemble.io/docs/options-partials.html)
 Type:  `String|Array`
 Default: `undefined`
