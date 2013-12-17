@@ -77,7 +77,7 @@ module.exports = function(grunt) {
       var registerPartial = function(engine, filename, content) { engine.registerPartial(filename, content); };
       assemble.options.registerPartial = assemble.options.registerPartial || registerPartial;
 
-      assemble.partials = file.expand(assemble.options.partials);
+      assemble.partials = file.expand({ cwd: assemble.options.partialsdir || process.cwd() || '' }, assemble.options.partials);
 
       if(_.isArray(assemble.options.data)) {
         assemble.dataFiles = file.expand(assemble.options.data);
