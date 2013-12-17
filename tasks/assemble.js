@@ -78,7 +78,7 @@ module.exports = function(grunt) {
       assemble.options.registerPartial = assemble.options.registerPartial || registerPartial;
 
       assemble.partials = file.expand({ cwd: assemble.options.partialsdir || process.cwd() || '' }, assemble.options.partials);
-
+      
       if(_.isArray(assemble.options.data)) {
         assemble.dataFiles = file.expand(assemble.options.data);
         assemble.options.data = {};
@@ -132,6 +132,8 @@ module.exports = function(grunt) {
         grunt.verbose.write(('\n' + 'Processing partials...\n').grey);
 
         partials.forEach(function(filepath) {
+          filepath = path.normalize(path.join(assemble.options.partialsdir || process.cwd() || '', filepath));
+
           var filename = path.basename(filepath, path.extname(filepath));
           grunt.verbose.ok(('Processing ' + filename.cyan + ' partial'));
 
@@ -140,6 +142,20 @@ module.exports = function(grunt) {
           //If the partial is empty, lets still allow it to be used.
           if(partial === '') {
             partial = '{{!}}';
+          }
+
+          if(assemble.options.partialsdir) {
+            grunt.log.writeln("path: " + path.dirname(filepath));
+
+            filename = path.relative(assemble.options.partialsdir, path.dirname(filepath) + path.sep + filename).split(path.sep);
+
+            if(filename.length > 2) {
+              filename.splice(1, filename.length - 2);
+            }
+
+            filename = filename.join('-');
+
+            grunt.log.writeln("path: " + filename);
           }
 
           // get the data
