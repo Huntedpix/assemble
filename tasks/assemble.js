@@ -145,8 +145,6 @@ module.exports = function(grunt) {
           }
 
           if(assemble.options.partialsdir) {
-            grunt.log.writeln("path: " + path.dirname(filepath));
-
             filename = path.relative(assemble.options.partialsdir, path.dirname(filepath) + path.sep + filename).split(path.sep);
 
             if(filename.length > 2) {
@@ -154,8 +152,6 @@ module.exports = function(grunt) {
             }
 
             filename = filename.join('-');
-
-            grunt.log.writeln("path: " + filename);
           }
 
           // get the data
